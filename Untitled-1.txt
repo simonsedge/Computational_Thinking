@@ -1,0 +1,44 @@
+How to build intuition for repeatable algorithm questions?
+
+1. "Sliding window" solution pattern:
+- when you need to process a series of consecutive data elements like a list or string, you may consider a starting with a small group of data (window) of the list and move it to the next consecutive window position until the entire list is scanned.
+- if problem asks me to find subset of elements that satisfies a given condition
+- my input would be a linear data structure like an array, string or linked list and i'd have to find the longest or shortest substring, subarray or even a subset of elements that satisfy certain constraints.
+- question: "given a string you need to print the longest substring with M unique characters"
+    - "given a string" = input = linear data structure
+    - "longest substring" = subset
+    - "M unique characters" = conditions
+
+2. "Subset" solution pattern:
+- when you need to find all the possible combinations of a given set of elements, repetitions may or may not be asked
+- you can interatively build all the subsets level by level
+    {} -> {a} -> {a, b}, {b, a} -> {a, b, c}, {a, c, b}, {b, a, c}, {b, c, a}, {c, a, b}, {c, b, a}
+    - this approach is similar to breadth first search
+
+3. "Modified binary search" solution pattern:
+- binary search is when you divide the subspace in half again and again (divide and conquer). modified is simply adjusting to problem logic
+- leetcode 33 "search in rotated sorted array"
+    - there is an integer array "nums" sorted in ascending order (with distinct values)
+    - prior to being passed to your function, nums is possibly rotated at an unknown pivot index k (1 <= k < nums.length) such that the resulting array is [nums[k], nums[k+1], ..., nums[n-1], nums[0], nums[1], ..., nums[k-1]] (0-indexed) --> (i.e., [0,1,2,4,5,6,7] might become [4,5,6,7,0,1,2] by rotating at pivot index 3)
+    - given the array nums after the possible rotation and an integer target, return the index of target if it is in nums, or -1 if it is not in nums
+    - you must write an algorithm with O(log n) runtime complexity
+- because pivot index is rotated, that means you need to modify the standard binary search to figure which half of the array to search in
+- that means you need to understand binary search really well
+
+    def binarySearch(array, target):
+    low, high = 0, len(array) - 1
+    while low <= high:
+        mid = (low + high) // 2
+        if array[mid] == target:
+            return mid
+        elif array[mid] < target:
+            low = mid + 1               # be able to visualize where left and right pointer end up if the array has duplicates but doesn't has the target
+        else:
+            high = mid - 1              # be able to visualize where left and right pointer end up if the array has duplicates but doesn't has the target
+    return -1
+
+    bisect module in python has a bisect_left and bisect_right function that does the same thing so implementing those 2 function will improve my understanding of binary search
+
+4. "Top k elements" solution pattern:
+- need good understanding of data structures and algorithms
+
