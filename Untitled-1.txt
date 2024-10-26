@@ -1,3 +1,22 @@
+https://www.youtube.com/shorts/R5IB1ugud1Q
+
+learn in order:
+
+1. (Arrays | Hashing)
+2. (2 Pointers | Stack)
+3. (Binary Search | Sliding Window | Linked List) [2 pointers prerequisite]
+4. (Trees) [BS and LL prerequisites]
+5. (Tries | Heap/Priority Queue | Backtracking)
+6. (Intervals | Greedy) [heap]
+7. (Graphs | 1-D DP) [backtracking]
+8. (Advanced Graphs) [heap + graphs]
+9. (2-D DP | Bit Manipulation)
+10. (Math & Geometry) [bit manipulation + graphs]
+
+---
+
+continue here: https://youtu.be/xo7XrRVxH8Y?si=U4PYOq6oM17B0J4B&t=170
+
 How to build intuition for repeatable algorithm questions?
 
 1. "Sliding window" solution pattern:
@@ -42,3 +61,107 @@ How to build intuition for repeatable algorithm questions?
 4. "Top k elements" solution pattern:
 - need good understanding of data structures and algorithms
 
+---
+
+https://www.youtube.com/watch?v=RYT08CaYq6A
+
+There are 2 categories of leetcode problems - nonlinear and linear.
+
+Linear includes 2 pointers, sliding window and binary search.
+Nonlinear includes breadth-first-search, depth-first-search, backtracking, priority queue (heap), dynamic programming (dp).
+
+2 pointers (see visual demonstrations):
+- reduces time complexity by traversing DSs like arrays, linked lists, or strings - therefore allows to solve in linear time O(n) instead of O(n^2)
+- there are 2 main methods of using 2 pointers, same or opposite direction
+- when in same direction a common use case is a fast and slow pointer for detecting cycles in linked lists or finding the middle of a list. the fast pointer moves 2 steps and the slow pointer just 1. this allows to check for a cycle when the 2 pointers meet (they didn't have to start on the same point), therefore also allowing to find key elements without re-traversing the DS
+- if in opposite direction its usually used to find pairs or comparing elements from opposite ends of the DS. classic example is finding 2 numbers in a sorted array (say 1,5,14,17,21) that sum up to a target value. one pointer starts at the beginning of the array and the other at the end and it keeps matching each pair side of the array
+
+sliding windown (see visual demonstrations)
+- its an extension of the 2 pointers but with a more focused purpose
+- while 2 pointers involves using 2 separate pointers to traverse and manipulate a DS, sliding window maintains a specified window distance (like 2 "spots"), dynamically adjusting its size as it progresses through the DS
+- goal is to manage a range or subset of elements that satisfy a specific condition like a subarray or substring
+- 1 pointer (say the start pointer) can be fixed and the end pointer keeps increasing ++1 so the window distance went from 0->1->2->etc. of course i can set the end pointer not at the end of the linear DS but say at n-3 position and instead of distancing the other (start) pointer ++1 i can diminish distance between them by pulling start pointer --1 closer to end pointer. i would do this to meet certain criteria like maximizing the length of a substring or maintaining constant a sum value within a target value
+- optimal for problems that require tracking contiguous sequences whether for strings, subarrays, or linkedin lists. its often coupled with hashmaps to keep track of the elements within the window
+
+binary search (see visualization)
+- technically an expansion of the 2 pointers cuz it uses a left and right pointer that have the list step by step
+- find target value in sorted array (need to sort array first) by repeatedly dividing the list in half
+- it starts at the middle element and checking if thats the target - if it is return it and thats all she wrote. if its smaller than target then you know the target is on the right end side of the list so you can eliminate all ascending sorted elements up to that point. you do it again until its greater or equal than target and if its greater you cut the other side (the elements at the right end side of the list)
+- allow to find target in logarithmic time O(log n) rather than searching each element O(n)
+- however its far more useful than only being used on sorted numerical lists as it can be used on any list where there is a monotonic function (there is a consistent increase or decrease as x approaches infinity vs say a sin(x) or cos(x) function. an increase that extends beyond just numbers). we're looking for any type of condition that can be used for sorting not strictly increasing numbers but with different "types"/"categories" if they're grouped. like say a SORTED list of 7 falses (just a F character element) and 2 truths (just a T character element), you can use the binary search to find the 1st T occurrence parsing it from left to right. in this case you look at the middle and say you see a T, then 1st T occurence in the list can only by that element or to the left side of the list (eliminating the right side). if i see an F at the middle instead, the Ts can be either on the left or right side so in this case it'd be good to have a pointer at the start and at the end so i can situate myself in relation to in what side are these categories grouped in. also doesn't need to be only 2 categories, i can use the FF...TT.. logic too if array is not sorted but i can create a monotonic condition (30 40 50 60 70 80 90 10 20 and for any element <= than last element (==20), it is part of the rotated section while any larger than it is part of the original sorted section. therefore i can substitute the 30-90 to F and 10-20 to T and solve it the same way)
+
+{
+from typing import List
+def binary_search(arr: List[int], target: int) -> int:
+    left_pointer, right_pointer = 0, len(arr) - 1
+    first_index = -1  # Initialize to -1 for "not found"
+    while left_pointer <= right_pointer:
+        mid = (left_pointer + right_pointer) // 2
+        if feasible(mid):  # Check if the midpoint is feasible (user-defined condition)
+            first_index = mid  # Update first feasible index
+            right_pointer = mid - 1  # Move left to find an earlier feasible point
+        else:
+            left_pointer = mid + 1  # Move right if the condition isn't met
+    return first_index
+
+a variation of binary search where it aims to locate the first feasible element in a sorted array. The function feasible(mid) is likely a placeholder for a condition that checks if arr[mid] meets specific criteria. Here’s a step-by-step breakdown to help clarify the pointers and first_index:
+
+Pointers (left_pointer and right_pointer):
+In a binary search, left_pointer and right_pointer start at the beginning and end of the list, respectively. They divide the array into two halves at each step, narrowing down the search range by adjusting mid to be the midpoint between them. In each iteration:
+
+If the midpoint mid satisfies the feasible condition, it suggests that a feasible value is at or to the left of mid, so the right_pointer moves leftward (mid - 1) to continue searching in the left half.
+If feasible(mid) returns False, the left_pointer moves to mid + 1, discarding the left half because feasible elements, if any, would be on the right.
+first_index:
+first_index initially set to -1 is a placeholder to store the first position where the feasible condition holds. Each time feasible(mid) is True, first_index is updated to mid, marking this position as the current earliest feasible index found. Since the search narrows to the left half (right_pointer = mid - 1), the loop continues until the leftmost feasible element is found.
+
+Return Value:
+After the loop ends, first_index holds the first feasible index or remains -1 if no feasible elements were found.
+}
+
+graphs and trees
+- a graph is a DS that has at least 1 cycle and i need some visited set [visited = ()] to keep track of nodes/elements already visited
+- a tree is a graph with no cycles
+
+BFS
+- augments 1 step for all directions available from root/main node
+- needs the visited set as for each new step it starts off the last one
+- it uses a queue DS that works like a line FIFO
+
+{
+from collections inport deque
+
+def bfs_by_queue(root):
+    queue = deque([root]) # at least 1 element in the queue to kickstart BFS
+    while len(queue) > 0: # as long as there is an element in the queue
+        node = queue.popleft() # dequeue
+        for child in node.children: # enqueue children
+            if OK(child): # early return if problem condition met
+                return FOUND(child)
+            queue.append(child)
+    return NOT_FOUND
+}
+
+this pattern can be used to solve leetcode 102. binary tree level order traversal
+
+for example given a tree with a root node 3, children 9 and 20, where 20 has children 15 and 7, and we need to return the value of the nodes level by level:
+
+{
+from collections import deque
+
+def level_order_traversal(root):
+    if not root:
+        return []
+    result = []
+    queue = deque([root])
+    while len(queue) > 0:
+        level = []
+        for i in range(len(queue)):
+            node = queue.popleft()
+            level.append(node.vel)
+            if node.left:
+                queue.append(node.left)
+            if node.right:
+                queue.append(node.right)
+        result.append(level)
+    return result
+}
