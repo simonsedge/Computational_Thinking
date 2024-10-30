@@ -1,5 +1,7 @@
 # Computational Thinking For Problem Solving (UPenn Engineering Online Learning)
 
+
+
 ## 4 pillars of computational thinking:
 - Decomposition (taking a complex problem and breaking it into more manageable sub-problems)
 - Pattern Recognition (after decomposing we'll find common patterns amongst sub-problems - good for desired repetitive tasks for several identical data in any area in life)
@@ -15,7 +17,7 @@ algorithm cross_street()
       cross
     return
 
-## Common Algorithms pt.1 (Largest/smallet value)
+## Common Algorithms pt.1 (unordered Largest/smallet value)
 exs:
 
 1) There's a list of values and you want to create an algorithm that returns the largest value in that list:
@@ -92,7 +94,7 @@ if for item in list, item<min:
 else
     go back to "are there any other items in the list?" line
 
-## Common Algorithms pt.2 (Linear Search - does a collection contain a value?)
+## Common Algorithms pt.2 (unordered Linear Search - does a collection contain a value?)
 exs:
 
 1) determine whether a list of values contains a target value:
@@ -133,7 +135,59 @@ Algorithm Linear_Search()
     Stop
 End Algorithm
 
-## Common Algorithms pt.3 (Linear Search - does a collection contain a value?)
+## Common Algorithms pt.3 (Algorithmic complexity - how long will algo take to execute if input increases?)
 
+Complexity is just an expression of the number of operations in an algorithm.
 
+You tend to focus on the worst case scenario, so i need an answer as to what the worst case scenario is 
 
+Going back to the algorithm find_largest, we made n-1 comparisons with n == # of items and it would always maintain no matter the linear operation performed on n - this means the # of comparissons is roughly the same as number of elements so the algorithm has linear complexity
+
+Going back to the algotithm linear_search, regardless of whether there's a match or not, no matter item/target_value position, n size is irrelevant as algo stops when finds a match. but worst case scenario it doesnt find a match which should be worse than finding a match at last - therefore also linear complexity (no shit name of algo was linear search) as worst case scenario is n operations.
+
+## Common Algorithms pt.4 (Binary Search - how long will algo take to execute if input increases?)
+
+Here ordering lists is introduced to create better algos, therefore turning linear search into binary search in regards to most efficient algo
+
+Since binary search is dividing by 2 as many times needed and worst case scenario is no match for maximum number of operations, this means it has y=log2(x) logarithmic complexity with y = number of comparisons/operations in worst case scenario and x the number of items in a list
+
+exs:
+
+1) determine whether a sorted list of values contains a target value
+
+1.1) my first thought:
+algorithm_binary_search()
+get sorted list
+loop break list in half with 1 pointer at one item
+if pointer==target, return true
+if pointer>target
+  remove pointer and any value above it from the searchable list
+if pointer<target
+  remove pointer and any value below it from the searchable list
+
+1.2) interpretation of flowchart
+i actually got it right but there's other ways to write it like chatgpt
+
+1.3) chatgpt interpretation of flowchart:
+This pseudocode continuously checks the middle element of the list. If it matches the target, it outputs true and stops. Otherwise, it eliminates either the first or last half of the list based on whether the middle element is less than or greater than the target. If the list becomes empty without finding the target, it outputs false.
+
+Algorithm Binary_Search()
+    Input: list, target_value
+
+    While list is not empty
+        Read middle item, mid
+        If mid == target_value then
+            Output: true
+            Stop
+        End If
+
+        If mid < target_value then
+            Eliminate mid and first half of list
+        Else
+            Eliminate mid and last half of list
+        End If
+    End While
+
+    Output: false
+    Stop
+End Algorithm
