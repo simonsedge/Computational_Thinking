@@ -541,3 +541,57 @@ for each dog in similar_dogs (iterate over the 3 dogs)
 if vote ≥ 2 (since there are 3 dogs a majority would be 2 or more)
 then output: true (the new dog is suitable for at least 2 of the most similar dogs)
 else output: false
+
+# Introduction to Programming with Python
+
+Programming is really only the last step after you do computational thinking, design the architecture/software, etc. It's simply the act of expressing an algorithm using syntax that computer can compile.
+
+It starts by analysing a basic algo and asking what it does:
+{
+values = []
+count = 0
+for value in values:
+	if value>0:
+ 		count = count + 1
+print(count)
+}
+
+So it takes a list, initializes variable count (stupid name could just name it positive_numbers) to 0, then in a loop for every value in the list if value>0, update the count variable to ++1. after iterating all values (when loop ends), print the count.
+
+Then mentions some obvious stuff, good note that variables should not include uppercase letters. Stuff like print("string ", c) will print out a constant string with a variable. Stuff like how a syntax error is like writing "dog red arrive pavement" when you don't use the right words (prant("...") or incorrect use) and/or order (5=age) and/or missing data . Or stuff like runtime errors when code is expressed using valid syntax but computer cannot evaluate it like typeError when trying to assign an invalid sum of 2 different types of data to a variable. Or like when you haven't initialized variables or ZeroDivision error. And reminds you that python will stop after 1st error so only 1 error shown in compiler even if many even in the same line
+
+Some mentions on operators (** for power, // for integer_quotient which rounds to nearest whole number so 2.5 or 2.9 becomes 2, % for modulus as in the quotient which is the difference between numerator and closest integer multiplication to numerator without going past it).
+Also, reminder that python prioritizes **, then *, then +; And you use parenthesis to prioritise.
+Then some mention on comparison operators ==, != or <>, >= and how maths characteristics are always based off that like "is A divisible by B" is just a % b == 0
+Also some mention of how elif should be used instead of else (just the notion that elif should be used if i want to include the intersection of previous if statement and the new "else" statement. an else would probably be a larger set which would be just the opposite of the initial if)
+
+Then on lists he just says that a list is nothing more than a collection of integers/strings/floats assigned to a collection of variables, and that whole pack is assigned to a variable
+- you use it because you can perform operations with the data without having to declare new variables like
+	- list.append("...") to add to end of list
+	- list.insert(3, "...") to allocate index 3 in the list to the element i want to insert
+	- list.remove("...") to remove 1st instance of that value from the list (in case of duplicates) - and the fact that when you remove an element, indexes above slide to the left
+	- list.pop(3) to remove element in index position 3
+- on indices it's list[0] for example and if counting from the end index it doesn't start at 0 but at -1 instead, then -2, -3, ...
+	- to add an element to the end it's always append and not insert(-1) as that's the second to last place therefore shifting every element after that to the right
+- another note on runtime index error when i try to use an index that is out of range for the list
+- another note on runtime error value error when i try to remove a value that is not in the list
+	- if i wanted to check if there's a value before removing it or protect against index errors, instead of writing a greedy algo going 1 by 1 until match like in "unordered Search", python has nice syntax:
+ 		- if "corgi" in list:
+   			... (like list.remove("corgi"))
+
+it also makes some points on safeguarding against indexerrors via instead of writing var = list.pop(i) you write if len(list)>i: \ var = list.pop(i), therefore guaranteeing it doesnt give a runtime error
+
+there's an exercise where you had some initial code and had to create the logic. the only interesting point was about swapping 1st and last values and how ridiculously stupid it is that could need to do 4 steps for that. so in that sense although the program would work nonetheless, its extremely inneficient for the seemingly simple task to write it like:
+
+  list.append(list[0]) # O(1)
+  list.pop(0) # O(n) because it shifts all elements to the left
+  list.insert(0, list[-2]) # O(n) because it shifts all elements to the right
+  list.pop(-2) # O(>1) because it still needs to shift last element to the right
+
+instead i could either:
+
+- do tuple unpacking which is a O(1) operation as no elements need to be reshuffled in memory: values[0], values[-1] = values[-1], values[0]
+- using a temporary variable which is what they have done in that exercise that tripped me up with the ascending sorting algorithm. This is also 0(1).
+	temp = values[0]     # Store the first element in a temporary variable
+	values[0] = values[-1]  # Move the last element to the first position
+	values[-1] = temp       # Set the last position to the original first element
