@@ -1,6 +1,4 @@
-# Computational Thinking For Problem Solving (UPenn Engineering Online Learning)
-
-
+# Computational Thinking For Problem Solving (University of Pennsylvania Engineering Online Learning)
 
 ## 4 pillars of computational thinking:
 - Decomposition (taking a complex problem and breaking it into more manageable sub-problems)
@@ -191,3 +189,17 @@ Algorithm Binary_Search()
     Output: false
     Stop
 End Algorithm
+
+## Common Algorithms pt.5 (Brute Force)
+
+In this example brute force had an exponential complexity of 2^n since for each meeting of the group of meetings was either apart of the solution or not
+
+Worst way to employ brute force is when permutations (order) matters like a djiskra type algo for shortest multi path since all # possibilities == n! so this is actually named factorial complexity
+
+A few years ago, I taught a class with eight teaching assistants and I wanted to meet all of them once a week. I know the students are busy and it would be hard to get all of us together in the same place at a reasonable time of day. So, I gave them five options for meeting times as you see here, and then I wanted to choose some combination of meeting times so that I could meet each TA at least once during the week, even if it meant having multiple meetings. So, an algorithm we could use here is to use brute force to find all possible combinations of the five meeting times and then identify those combinations where I can meet all TA's and then optimize it by finding the combination with the smallest number of meetings because I'm busy too. So, how many possible solutions are there? To determine the number of possible solutions using brute force, we can look at each potential meeting time and say that we either will or will not include it in the solution. For example, from Monday 4:00 PM, I either do or do not have a meeting at that time. So, there are two options for Monday 4:00 PM because I either do or do not include it in the solution. Likewise for Tuesday 6:00 PM, I either do or do not include it in the combination of meeting times. So, there are two options for it as well and so on. Now let's look at the combinations of options like we did for the museum example starting with just the first two times. One combination is to have meetings at both Monday 4:00 PM and Tuesday 6:00 PM. That is, I can include both in my solution. Another combination is to have a meeting on Monday at 4:00 PM but not Tuesday 6:00 PM, that's part of another solution. The third combination is to not meet on Monday at 4:00 PM, but to meet Tuesday at six, that's yet another solution. The fourth combination of these two times is to not have meetings at either time. So, you see again that we're just multiplying the number of options. For each of the five meeting times, we either do or do not include it. 
+
+## Common Algorithms pt.6 (Greedy Algorithms)
+
+A simple approach that doesn't always give the best algorithm solution but it's close to optimal in much less time. Contrary to brute force, you make a decision that seems best currently and keep repeating the same decision until done. So in a way greedy algorithms are better for human use vs computer use to get a somewhat right answer with a large input size.
+
+So let's assume i got a daily schedule full of classes and some breaks. I want to solve the problem of my laptop battery going dead, therefore i need to charge it during class breaks. but i want to charge it as few times as possible. instead of looking at all possible breaks and going brute force thinking "i either charge or not charge per every break", a greedy algorithm that only charges right after or before battery going dead for the first time and repeating for next times might very well be the optimal solution.
