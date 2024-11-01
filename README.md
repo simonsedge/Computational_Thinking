@@ -595,3 +595,85 @@ instead i could either:
 	temp = values[0]     # Store the first element in a temporary variable
 	values[0] = values[-1]  # Move the last element to the first position
 	values[-1] = temp       # Set the last position to the original first element
+
+they mention the basic count = count + 1 is the same as count += 1 (not ++1 this does not exist in python) and how indentation is necessary in for/if/while/... statements
+
+they also mention how you can do nested for-loops like:
+names1 = []
+names2 = []
+common_names = []
+for name1 in names1: # imagine an outer circular loop being formed englobing the inner circular loop below - it will stay in first name1 and loop all name2's before iterating the 2nd pass of names1
+	for name2 in names2:
+ 		if name1 == name 2 and name1 not in common_names: #another good tip, didn't know i could use "and" and "not in"
+   			common_names.append(name1)
+print(common_names)
+
+and how i can understand debugging better if i print what's happening before and after any conditional statements like print("comparing ", name1, " to ", name2) before and in the same indent as the if statement in the previous code and print("adding ", name1, " to common_names") after the if statement inside it (indented)
+
+nested for loops are great for iterating all elements but sometimes we want to access elements by their indices while in a loop and we need some counter index that increments on each iteration. example: determine if list is sorted in increasing order
+
+ages = []
+is_sorted = True # whether or not its sorted (initialize as True, assuming the list is sorted until we find otherwise.)
+for i in range(1, len(ages)):
+	if ages[i] <= ages[i-1]:
+ 		is_sorted = False
+   		break
+if is_sorted:
+	print("the list is sorted")
+else:
+	print("the list is not sorted")
+
+An explanation on why to use the boolean initialization is found here
+
+ages = [1, 3, 2]  # Example list
+
+#Initializing `is_sorted = True` is a common technique when you want to assume something is true until proven otherwise.
+#Starting Assumption:
+#By initializing `is_sorted` to True, you’re assuming the list is sorted from the start.
+#As you loop through the list, you check each element pair.
+#If you find any pair that’s out of order, you set `is_sorted = False` and break out of the loop.
+is_sorted = True
+
+for i in range(1, len(ages)):
+    #Why Initialize to True Instead of False?
+    #If you initialized `is_sorted` to False, it would imply the list is unsorted from the beginning.
+    #Then, you would need extra logic to set it to True only if every pair satisfies the sorted condition, which complicates the code.
+    #By starting with True, you only need to change it to False if you find a single unsorted pair.
+    #This approach allows you to detect an unsorted list early and exit the loop as soon as the list is confirmed to be unsorted,
+    #making the code more efficient.
+    
+    if ages[i] < ages[i - 1]:  # Check if the current element is less than the previous one
+        is_sorted = False  # List is not sorted, so we set `is_sorted` to False
+        break
+
+#Minimal Initialization:
+#Setting `is_sorted = True` is the simplest, most efficient way to initialize this variable for the given logic.
+#It avoids the need for extra checks or a more complicated setup.
+
+#Example Walkthrough
+#Imagine you have a list [1, 3, 2]:
+#- `is_sorted` starts as True.
+#- You check 1 <= 3 (okay) and move on.
+#- Then you check 3 <= 2 (not okay). Here, you set `is_sorted = False` and break out of the loop, knowing the list isn’t sorted.
+
+#Key Takeaway:
+#Initializing `is_sorted = True` sets up a default assumption that simplifies the logic.
+#You only need to change it if you find evidence to the contrary, which makes the code cleaner and more efficient.
+
+#After the loop, we check if `is_sorted` is still True
+if is_sorted:
+    print("The list is sorted")
+else:
+    print("The list is not sorted")
+
+in regards to while loops: for loops are good when we know in advance how many times we want to run the loop. but while loops are good for when we only know the condition for the loop to occur and when condition changes, loop breaks:
+
+things like making sure the user inserts a valid input like "while number<=0: \ print("that number is not positive") \ value = input("please enter a positive number: ") \ number=int(value)
+this number = int(value) is a very interesting function where int converts the string input in value = input("please enter a positive number: ") and converts it to a integer.
+
+then i mean for nearly every algorithm i want there's already a function in python that does it:
+- like finding the largest value algorithm, in reality its just: max(values)
+- like finding the target value, in reality its just: if target_value in list: \ print("list contains target_value")
+
+
+
