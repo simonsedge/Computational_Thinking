@@ -675,5 +675,40 @@ then i mean for nearly every algorithm i want there's already a function in pyth
 - like finding the largest value algorithm, in reality its just: max(values)
 - like finding the target value, in reality its just: if target_value in list: \ print("list contains target_value")
 
+Now in regards to functions, sometimes we want to keep reusing some algorithm without writing it multiple times (doesn't alter complexity though for the same program, although it improves maintenance and runtime efficiency) or separate the code just so it's easier for humans to read. this is known in other programming languages as a subroutine/proceadure/method but in python we call it a function - takes arguments and we'll call the return value. It's really nothing new, it's just the separation of code i already have.
 
+You first define it by specifying name, parameters, and body. then you can invoke it in the code by specifying input arguments and assigning variables to hold outputs:
+def calculate_hypotenuse(a,b):
+	return (aa+bb)**0.5
+x, y = 3, 4 #btw if i had called these "a" and "b", because it's not inside indented, or in other words, out of scope, these variables would be different than the variables inside the function. so it's just a reading nightmare but technically speaking its alright. so printing "a" would output 3 in this case instead of an out-of-scope "x" value serving as argument for calling the function like c = calculate_hypotenuse(100, ...) where you could expect 100 to be printed when printing "a"
+c = calculate_hypotenuse(x,y)
+print(c)
+
+Instead of writing the algo for the determination if list is sorted, i could define a function and then easily call it with new lists as arguments:
+{
+def is_increasing(my_list):
+	is_sorted = True
+ 	for i in range(1, len(my_list)):
+  		if my_list[i-1] >= my_list[i]:
+    			is_sorted = False
+       			break
+       	return is_sorted
+}
+ages = [int1, int2, ...]
+names = [string1, string2, ...] 
+print(is_increasing(ages)) prints obvious answer
+print(is_increasing(names)) prints true if list has ascending alphabetical order
+
+But more interesting is the fact you can have a function return multiple values like when say extracting the 3 largest values:
+{
+def three_largest(input_list):
+	list_copy = input_list.copy() #great practise to not modify original	
+	max_value1 = max(list_copy)
+	list_copy.remove(max_value1) #don't double count
+	...
+	max_value3 = max(list_copy)
+	return (max_value1, max_value2, max_value3) # in order to return them all together as a single output of this function you put the data in a tuple - a temporary collection of values that we use when we want a function to return more than 1 thing. the question to whether why not a list instead is technical and stylistical. first off, stylistically, python code should only return a list when the thing it's returning is supposed to be a list and not a workaround as a way of returning multiple things. From a technical point of view if we return a list, the code that called our function could add or remove elements which may or may not be what we want, so tuples cannot have elements added or removed. and as a side note, tuples do not imply that the elements belong together as part of a collection
+}
+numbers = [4, 5, 1, 2, 8, 9, .3]
+first, second, third = three_largest(numbers) #we use the variables to hold the three return values that were grouped together into the tuple
 
