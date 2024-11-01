@@ -712,3 +712,137 @@ def three_largest(input_list):
 numbers = [4, 5, 1, 2, 8, 9, .3]
 first, second, third = three_largest(numbers) #we use the variables to hold the three return values that were grouped together into the tuple
 
+Now moving on to classes and objects:
+if you want to still store several elements in a single variable like a list but want to have a different name for each element within that collection.
+A dog named Jake is a collection of entities or attributes such as age, weight, breed, complexion, ... so each element has its own name. You don't use a list cuz a list is easier to accidentally transform data and there's no way to know the properties should go together in the analysis if i just use a list and dont name each element.
+For this situation its better to use an object - a named collection of variables or attributes that each have their own individual names as well. Before we use the object, we need to define the blueprint for the object, also known as a class:
+
+{
+class Cat: #class names start with capital letters, we have not created the object yet at this point
+	def_init_(self, init_name, init_age, init_color): #the init function is a special function called the constructor and it's called when we create (the first)/(a new) cat object - that is, a new instance of the cat class. the first parameter is always self, meaning "this object", and then have the other parameters i think i'll need to create the cat
+ 		#initializing the object's attributes, the "self." notation means that this variable is an attribute that is part of this object
+   		self.name = init_name
+   		self.age = init_age
+     		self.color = init_color
+}
+var_1 = Cat("james", 3, "grey") #this is an object - you're creating a new cat variable and invoking its constructr or its init function - an instance of the cat class
+var_2 = Cat("agnes", 4, "black") #another object
+print(james.color)
+agnes.age = 5 (overrides the previous age to become this age inside the var_2 cat object)
+
+Now another important point is a class not only has attributes but can have its own operations or functions as well:
+
+class Cat:
+	def _init_(self, init_name):
+ 		self.name = init_name
+   		self.friends = [] #empty list but question i have is: if this is another attribute why not also write it inside the _init_?
+     	def add_friends(self, new_friend): #just a regular function they created to allow adding a friend to the friends empty list. you gotta use self to indicate that it's this cat
+      		if new_friend not in self.friends: #self.friends is a list and it means each cat class/object has its own list of friends
+			self.friends.append(new_friend)
+james = Cat("james")
+agnes = Cat("agnes")
+james.add_friend(agnes)
+for friend in james.friends:
+	print(friend.name) #since we know those friends are cats, we know they have name attributes, so we can print like this
+
+Now lets say you want to find the cat with the youngest age. Should you write the algo or use in-built python functions to find a minimum? Well usually you'd try to never write them myself but this is slightly different because we're not looking for the "minimum cat", we're looking for the "minimum age" associated with a cat. Therefore i could write:
+{
+def youngest_cat(cats): #cats is a list with many elements
+	youngest = cats[0] #way to define cats here is by a list of elements or the object's name
+ 	youngest_age = cats[0].age #initializing that the age of the youngest cat iterated at that point is that cat's age
+  	for cat in cats: #iterate over all the cats in the list and call each one "cat"
+   		if cat.age < youngest_age:
+			youngest = cat
+   			youngest_age = cat.age
+      	return youngest
+}
+james = Cat("james", 3, "grey")
+...
+...
+...
+my_cats = [james, agnes, sally, snowy] #the youngest_cat function takes a list as its input
+print("Youngest is ", youngest_cat(my_cats).name)
+
+## Back to the case studies, but now in python
+
+The centre meetings problem:
+#represents a meeting request
+class Request:
+	def _init_(self, input_name, input_start, input_end):
+ 		self.name = input_name
+   		self.start = input_start
+     		self.end = input_end
+#create requests
+r1 = Request("A", 0, 3)
+...
+r7 = Request["G", 7, 9)
+requests = [r1, ..., r7]
+
+scheduled_requests = [] #initialize empty list to schedule requests
+while len(requests)>0: #we don't use for loop cuz we don't know how many times we will run the loop
+	#schedule the one with earliest ending time
+ 	earliest = requests[0]
+  	earliest_end = requests[0].end
+   	for request in requests:
+    		if request.end < earliest_end:
+      			earliest = request
+	 		earliest_end = request.end #we know that earliest is the request with the earliest ending time
+    	print("schedulling ", earliest.name) #just so we can check which request is being scheduled and then below add it to the list of scheduled requests
+     	scheduled_requests.append(earliest)
+
+      	#remove all the requests with start time before that ending time unscheduled 
+       	unscheduled = list(requests) #make copy of the requests list because if we didn't the code would be looping over the elements of the request list but also simultaneously removing elements from that list
+	for request in requests:
+ 		if request.start < earliest.end: #overlapping requests
+   			unscheduled.remove(request)
+      	requests = unscheduled
+#now scheduled_requests hold all scheduled requests
+      	
+
+The dogs disaster search and rescue problem:
+#this class represnets a dog
+class Dog:
+	def _init_(self, input_test1, input_test2, input_test3, input_suitable = None): #meaning a dog is represented as a full result of these 3 elements and the None is used for when we know there's a variable but we don't know its values so unless we assign it a value when calling it, it serves no purpose
+ 		self.catwalk_test = input_test1
+   		self.surface_test = intput_test2
+     		self.conflict_test = input_test3
+       		self.suitable = input_suitable
+#create some dogs
+all_dogs = []
+all_dogs.append(Dog(True, Flase, True, True))
+all_dogs.append(Dog(False, False, True, False))
+all_dogs.append(Dog(True, True, True, True))
+all_dogs.append(Dog(True, Flase, True, False))
+
+new_dog = Dog(True, False, False) #you don't specifcy the 4th element like before becase that element is what you're trying to assess so you don't know anything about it yet, it's just something that will be used in the future when i do know
+
+#determine similarity to all other dogs
+for dog in all_dogs:
+	dog.similarity = 0 #assign a similarity attribute that wasn't added in the class or object when i created it - this is a feature in python that can do it even outside class/object
+ 	if dog.catwalk_test == new_dog.catwalk_test:
+  		dog.similarity += 1
+    	if dog.surface_test == new_dog.surface_test:
+     		dog.similarity += 1
+       	if dog.confliect_test == new.dog.conflict_test:
+		dog.similarity += 1
+
+#find 3 most similar dogs
+similar_dogs = []
+#loop 3 times
+for i in range(3): #produces a list containing 0, 1, and 2 and will do the loop 1x for each of those 3 values
+	most_similar_dog = all_dogs[0]
+ 	max_similarity = all_dogs[0].similarity
+  	for dog in all_dogs:
+   		if dog.similarity > max_similarity:
+     			max_similarity = dog.similarity
+			most_similar_dog = dog
+   	similar_dogs.append(most_similar_dog)
+    	all_dogs.remove(most_similar_dog)
+vote = 0
+for dog in similar_dogs:
+	if dog.suitable:
+ 		vote += 1
+if vote >= 2 :
+	print("prediction: suitable!")
+else:
+	print("prediction: not suitable")
