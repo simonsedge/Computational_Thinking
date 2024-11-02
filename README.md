@@ -805,9 +805,10 @@ while len(requests)>0: #we don't use for loop cuz we don't know how many times w
    			unscheduled.remove(request)
       	requests = unscheduled
 #now scheduled_requests hold all scheduled requests
-      	
+```
 
 The dogs disaster search and rescue problem:
+```
 #this class represnets a dog
 class Dog:
 	def _init_(self, input_test1, input_test2, input_test3, input_suitable = None): #meaning a dog is represented as a full result of these 3 elements and the None is used for when we know there's a variable but we don't know its values so unless we assign it a value when calling it, it serves no purpose
