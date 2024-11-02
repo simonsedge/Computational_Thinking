@@ -1,4 +1,4 @@
-# Computational Thinking For Problem Solving (University of Pennsylvania Engineering Online Learning)
+# PART 1 - Full Course by University of Pennsylvania Engineering Online Learning
 
 ## 4 pillars of computational thinking:
 - Decomposition (taking a complex problem and breaking it into more manageable sub-problems)
@@ -856,4 +856,6 @@ if vote >= 2 :
 else:
 	print("prediction: not suitable")
 ```
+
+# PART 2 - Full Course by University of Michigan
 
