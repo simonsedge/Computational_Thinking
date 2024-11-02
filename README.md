@@ -1,4 +1,8 @@
-# PART 1 - Full Course by University of Pennsylvania Engineering Online Learning
+# Table of Contents
+- [Full Course by University of Pennsylvania](#full-course-by-university-of-pennsylvania)
+- [Full Course by University of Michingan](#full-course-by-university-of-michigan)
+
+# Full Course by University of Pennsylvania
 
 ## 4 pillars of computational thinking:
 - Decomposition (taking a complex problem and breaking it into more manageable sub-problems)
@@ -857,5 +861,5 @@ else:
 	print("prediction: not suitable")
 ```
 
-# PART 2 - Full Course by University of Michigan
+# Full Course by University of Michigan
 
