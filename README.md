@@ -4,7 +4,8 @@
 
 # Full Course by University of Pennsylvania
 
-## 4 pillars of computational thinking:
+## Computational thinking
+Has 4 pillars:
 - Decomposition (taking a complex problem and breaking it into more manageable sub-problems)
 - Pattern Recognition (after decomposing we'll find common patterns amongst sub-problems - good for desired repetitive tasks for several identical data in any area in life)
 - Data Representation and Abstraction (determining what inputs of problem are important)
