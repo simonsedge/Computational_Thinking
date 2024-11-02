@@ -5,7 +5,7 @@
 - Pattern Recognition (after decomposing we'll find common patterns amongst sub-problems - good for desired repetitive tasks for several identical data in any area in life)
 - Data Representation and Abstraction (determining what inputs of problem are important)
 - Algorithms (step by step instructions on how to solve the problem and this course uses flowchart for instructions but ill be translating that to pseudocode)   
-
+```
 algorithm cross_street()
   look to the right
   look to the left
@@ -14,14 +14,14 @@ algorithm cross_street()
     else
       cross
     return
-
+```
 ## Common Algorithms pt.1 (unordered Largest/smallet value)
 exs:
 
 1) There's a list of values and you want to create an algorithm that returns the largest value in that list:
 
 1.1) My first idea was:
-
+```
 algorithm find_largest()
   set index0 of list to max_so_far variable # the current max recorded as list is iterated
   iterate the next value
@@ -31,9 +31,9 @@ algorithm find_largest()
     max_so_far=new_value
   go back to "iterate the next value"
   return max_so_far
-
+```
 1.2) My flowchart-to-pseudocode solution was interpreted like:
-
+```
 algorithm find_largest()
 get input list
   if input empty
@@ -49,10 +49,10 @@ if for item in list, item>max
     stop
 else
   go back to "are there any other values in the list?" line
-
+```
 1.3) Chatgpt's solution for pseudocode was:
 checks if the list is empty first. If not, it sets the first item as the initial maximum, then iterates through the remaining items to update the maximum as needed, finally outputting the largest value in the list.
-
+```
 Algorithm Find_Max()
     Input: list
     If list is empty then
@@ -72,8 +72,9 @@ Algorithm Find_Max()
     Output: max
     Stop
 End Algorithm
-
+```
 1.4) Actual solution was:
+```
 algorithm find_largest()
   input: list_collection
   output: max_so_far_value
@@ -83,9 +84,9 @@ for item in list_collection:
     max_so_far_value = item
 output max_so_far
 stop
-
+```
 1.5) extra: now find the smallest value
-
+```
 algorithm find_smallest()
 get list
   if list empty
@@ -101,18 +102,20 @@ if for item in list, item<min:
     stop
 else
     go back to "are there any other items in the list?" line
-
+```
 ## Common Algorithms pt.2 (unordered Linear Search - does a collection contain a value?)
 exs:
 
 1) determine whether a list of values contains a target value:
 
 1.1) My first idea was:
+```
 algorithm_linear_search()
 have a data point defining target_value
 iterate list 1-by-1 or if data is better structured create a better algo to see if item==target_value
-
+```
 1.2) My flowchart-to-pseudocode translation was interpreted like:
+```
 algorithm_linear_search()
 get input list
 has this current item in list been compared to target_value?
@@ -126,10 +129,10 @@ if yes
 else
   return "false"
   stop
-
+```
 1.3) Chatgpt's Solution to Flowchart was:
 i mean it's in the wording itself. it literally just compares each item to a target and only spits out something if there's a match. so it's basically a loop of comparisson against the same value and if nothing comes out as a match then it's a false.
-
+```
 Algorithm Linear_Search()
     Input: list, target_value
     While there is an untested item in list (only doesnt work for 1st value if list is empty)
@@ -142,8 +145,9 @@ Algorithm Linear_Search()
     Output: false
     Stop
 End Algorithm
-
+```
 1.4) Actual solution as seen in 3.5
+```
 algorithm linear_search
   inputs: list_collection, target_value
   output: true if match, false if not
@@ -152,7 +156,7 @@ for item in list_collection:
   then output: true
     stop
 output: false
-
+```
 
 ## Common Algorithms pt.3 (Algorithmic complexity - how long will algo take to execute if input increases?)
 
@@ -175,6 +179,7 @@ exs:
 1) determine whether a sorted list of values contains a target value
 
 1.1) my first thought:
+```
 algorithm_binary_search()
 get sorted list
 loop break list in half with 1 pointer at one item
@@ -183,13 +188,13 @@ if pointer>target
   remove pointer and any value above it from the searchable list
 if pointer<target
   remove pointer and any value below it from the searchable list
-
+```
 1.2) interpretation of flowchart
 i actually got it right but there's other ways to write it like chatgpt
 
 1.3) chatgpt interpretation of flowchart:
 This pseudocode continuously checks the middle element of the list. If it matches the target, it outputs true and stops. Otherwise, it eliminates either the first or last half of the list based on whether the middle element is less than or greater than the target. If the list becomes empty without finding the target, it outputs false.
-
+```
 Algorithm Binary_Search()
     Input: list, target_value
 
@@ -210,7 +215,7 @@ Algorithm Binary_Search()
     Output: false
     Stop
 End Algorithm
-
+```
 ## Common Algorithms pt.5 (Brute Force)
 
 In this example brute force had an exponential complexity of 2^n since for each meeting of the group of meetings was either apart of the solution or not
@@ -236,7 +241,7 @@ The centre problem had 27 groups requesting meetings and they wanted to meet as 
 The pseudocode for this can be found in 3.5
 
 This was chatgpt's attempt at it: 
-
+```
 Algorithm Scheduling()
     Input: Collection of all requests
 
@@ -268,7 +273,7 @@ Algorithm Scheduling()
     Output: schedule
     Stop
 End Algorithm
-
+```
 
 In regards to complexity, even though both loops, individually, are linear, you have an inner loop within a outter loop so if you increase input size you'll have to do twice as many things, twice as many times == quadratic/n^2 complexity as 2x inputs results in 4x as many operations
 
@@ -281,7 +286,7 @@ Then the dog center problem.
 The pseudocode for this can be found in 3.5
 
 This was chatgpt's attempt at it:
-
+```
 Algorithm Prediction()
     Input: collection of dogs, new_dog
 
@@ -319,7 +324,7 @@ Algorithm Prediction()
 
     Stop
 End Algorithm
-
+```
 This is actually a popular machine-learning algorithm known as K-Nearest Neighbors. For some value of k, which is usually odd like three in this case, we find the most similar or nearest elements for which we already know some piece of info and use that to predict the info for some new elements.
 
 So, what's the complexity of this algorithm? This algorithm consists of three parts, calculating the similarity of each dog, finding the three most similar dogs and conducting the vote. The first part is definitely linear. We do the calculation once for each dog. If there are twice as many dogs, it takes twice as many steps. The second part is also linear. In finding the most similar dog, we look at each dog in the list once. If we had twice as many dogs, we'd need to do twice as many comparisons. Now, you might say "Wait, isn't this quadratic like the scheduling algorithm, since we have the loop within a loop?" But, it doesn't matter that we go through the list three or five or a hundred times, because it's independent of the number of dogs. So, it's linear overall. If we doubled the number of dogs, we only double the number of steps. Conducting the vote is also linear. In the worst case, if we were doing a vote over all the dogs, then we'd have to look at each dog's value and that's linear. Since all parts of the prediction algorithm are linear, the algorithm as a whole is also linear. Because again, if for instance, we doubled the number of inputs, we have to do all the parts twice as many times. So overall, we just have twice as many total operations, which means it's linear.
@@ -385,6 +390,7 @@ Application in Algorithms: With conditional and iterative control, the control u
 exs:
 
 1) understand the pseudocode below:
+```
 stop ← number of items in list - 2
 for each item in list
     for i in range 0 ... stop
@@ -394,7 +400,7 @@ for each item in list
 			    list[i] ← list[i+1]
 			    list[i+1] ← temp
 output: list
-
+```
 Here is an explanation of the solution:
 
 As the hint suggests, let’s create a simple input list with values {4, 2, 3, 1} and see what happens on each step.
@@ -484,7 +490,7 @@ Although bubble sort is simple to implement, it is very inefficient and exhibits
 # Case studies
 
 Back to the center problem. Solution to it was:
-
+```
 algorithm centre_meetings
   inputs: requests_collection (elements with start and end times)
   output: scheduled_requests the full schedule that contains requests that don't overlap
@@ -503,9 +509,9 @@ while requests is not empty
   for each request in requests (inner loop all the requests)
     if request.start_time < earliest_request.end_time
     then remove request from requests
-
+```
 Now back to the dog rescue problem. Solution was:
-
+```
 algorithm dog_rescue
   inputs: dogs_collection (elements that have values for catwalk_test, surface_test, conflict_test, suitable, and similarity to the new dog), and new_dog (same 3 elements but does not have similarity and suitable values)
   outputs: majority value of suitable for the 3 elements in dogs that have the highest similarity values - a prediction of whether new dog will be suitable for search and rescue. take the 3 dogs with highest similarity, then take the majority value for their suitable values
@@ -541,20 +547,20 @@ for each dog in similar_dogs (iterate over the 3 dogs)
 if vote ≥ 2 (since there are 3 dogs a majority would be 2 or more)
 then output: true (the new dog is suitable for at least 2 of the most similar dogs)
 else output: false
-
+```
 # Introduction to Programming with Python
 
 Programming is really only the last step after you do computational thinking, design the architecture/software, etc. It's simply the act of expressing an algorithm using syntax that computer can compile.
 
 It starts by analysing a basic algo and asking what it does:
-{
+```
 values = []
 count = 0
 for value in values:
 	if value>0:
  		count = count + 1
 print(count)
-}
+```
 
 So it takes a list, initializes variable count (stupid name could just name it positive_numbers) to 0, then in a loop for every value in the list if value>0, update the count variable to ++1. after iterating all values (when loop ends), print the count.
 
@@ -582,23 +588,25 @@ Then on lists he just says that a list is nothing more than a collection of inte
 it also makes some points on safeguarding against indexerrors via instead of writing var = list.pop(i) you write if len(list)>i: \ var = list.pop(i), therefore guaranteeing it doesnt give a runtime error
 
 there's an exercise where you had some initial code and had to create the logic. the only interesting point was about swapping 1st and last values and how ridiculously stupid it is that could need to do 4 steps for that. so in that sense although the program would work nonetheless, its extremely inneficient for the seemingly simple task to write it like:
-
+```
   list.append(list[0]) # O(1)
   list.pop(0) # O(n) because it shifts all elements to the left
   list.insert(0, list[-2]) # O(n) because it shifts all elements to the right
   list.pop(-2) # O(>1) because it still needs to shift last element to the right
-
+```
 instead i could either:
 
 - do tuple unpacking which is a O(1) operation as no elements need to be reshuffled in memory: values[0], values[-1] = values[-1], values[0]
 - using a temporary variable which is what they have done in that exercise that tripped me up with the ascending sorting algorithm. This is also 0(1).
+```
 	temp = values[0]     # Store the first element in a temporary variable
 	values[0] = values[-1]  # Move the last element to the first position
 	values[-1] = temp       # Set the last position to the original first element
-
+```
 they mention the basic count = count + 1 is the same as count += 1 (not ++1 this does not exist in python) and how indentation is necessary in for/if/while/... statements
 
 they also mention how you can do nested for-loops like:
+```
 names1 = []
 names2 = []
 common_names = []
@@ -607,11 +615,12 @@ for name1 in names1: # imagine an outer circular loop being formed englobing the
  		if name1 == name 2 and name1 not in common_names: #another good tip, didn't know i could use "and" and "not in"
    			common_names.append(name1)
 print(common_names)
-
+```
 and how i can understand debugging better if i print what's happening before and after any conditional statements like print("comparing ", name1, " to ", name2) before and in the same indent as the if statement in the previous code and print("adding ", name1, " to common_names") after the if statement inside it (indented)
 
 nested for loops are great for iterating all elements but sometimes we want to access elements by their indices while in a loop and we need some counter index that increments on each iteration. example: determine if list is sorted in increasing order
 
+```
 ages = []
 is_sorted = True # whether or not its sorted (initialize as True, assuming the list is sorted until we find otherwise.)
 for i in range(1, len(ages)):
@@ -622,9 +631,9 @@ if is_sorted:
 	print("the list is sorted")
 else:
 	print("the list is not sorted")
-
+```
 An explanation on why to use the boolean initialization is found here
-
+```
 ages = [1, 3, 2]  # Example list
 
 #Initializing `is_sorted = True` is a common technique when you want to assume something is true until proven otherwise.
@@ -665,7 +674,7 @@ if is_sorted:
     print("The list is sorted")
 else:
     print("The list is not sorted")
-
+```
 in regards to while loops: for loops are good when we know in advance how many times we want to run the loop. but while loops are good for when we only know the condition for the loop to occur and when condition changes, loop breaks:
 
 things like making sure the user inserts a valid input like "while number<=0: \ print("that number is not positive") \ value = input("please enter a positive number: ") \ number=int(value)
@@ -685,7 +694,7 @@ c = calculate_hypotenuse(x,y)
 print(c)
 
 Instead of writing the algo for the determination if list is sorted, i could define a function and then easily call it with new lists as arguments:
-{
+```
 def is_increasing(my_list):
 	is_sorted = True
  	for i in range(1, len(my_list)):
@@ -693,14 +702,13 @@ def is_increasing(my_list):
     			is_sorted = False
        			break
        	return is_sorted
-}
 ages = [int1, int2, ...]
 names = [string1, string2, ...] 
 print(is_increasing(ages)) prints obvious answer
 print(is_increasing(names)) prints true if list has ascending alphabetical order
-
+```
 But more interesting is the fact you can have a function return multiple values like when say extracting the 3 largest values:
-{
+```
 def three_largest(input_list):
 	list_copy = input_list.copy() #great practise to not modify original	
 	max_value1 = max(list_copy)
@@ -711,27 +719,27 @@ def three_largest(input_list):
 }
 numbers = [4, 5, 1, 2, 8, 9, .3]
 first, second, third = three_largest(numbers) #we use the variables to hold the three return values that were grouped together into the tuple
+```
 
 Now moving on to classes and objects:
 if you want to still store several elements in a single variable like a list but want to have a different name for each element within that collection.
 A dog named Jake is a collection of entities or attributes such as age, weight, breed, complexion, ... so each element has its own name. You don't use a list cuz a list is easier to accidentally transform data and there's no way to know the properties should go together in the analysis if i just use a list and dont name each element.
 For this situation its better to use an object - a named collection of variables or attributes that each have their own individual names as well. Before we use the object, we need to define the blueprint for the object, also known as a class:
 
-{
+```
 class Cat: #class names start with capital letters, we have not created the object yet at this point
 	def_init_(self, init_name, init_age, init_color): #the init function is a special function called the constructor and it's called when we create (the first)/(a new) cat object - that is, a new instance of the cat class. the first parameter is always self, meaning "this object", and then have the other parameters i think i'll need to create the cat
  		#initializing the object's attributes, the "self." notation means that this variable is an attribute that is part of this object
    		self.name = init_name
    		self.age = init_age
      		self.color = init_color
-}
 var_1 = Cat("james", 3, "grey") #this is an object - you're creating a new cat variable and invoking its constructr or its init function - an instance of the cat class
 var_2 = Cat("agnes", 4, "black") #another object
 print(james.color)
 agnes.age = 5 (overrides the previous age to become this age inside the var_2 cat object)
-
+```
 Now another important point is a class not only has attributes but can have its own operations or functions as well:
-
+```
 class Cat:
 	def _init_(self, init_name):
  		self.name = init_name
@@ -744,9 +752,9 @@ agnes = Cat("agnes")
 james.add_friend(agnes)
 for friend in james.friends:
 	print(friend.name) #since we know those friends are cats, we know they have name attributes, so we can print like this
-
+```
 Now lets say you want to find the cat with the youngest age. Should you write the algo or use in-built python functions to find a minimum? Well usually you'd try to never write them myself but this is slightly different because we're not looking for the "minimum cat", we're looking for the "minimum age" associated with a cat. Therefore i could write:
-{
+```
 def youngest_cat(cats): #cats is a list with many elements
 	youngest = cats[0] #way to define cats here is by a list of elements or the object's name
  	youngest_age = cats[0].age #initializing that the age of the youngest cat iterated at that point is that cat's age
@@ -755,17 +763,17 @@ def youngest_cat(cats): #cats is a list with many elements
 			youngest = cat
    			youngest_age = cat.age
       	return youngest
-}
 james = Cat("james", 3, "grey")
 ...
 ...
 ...
 my_cats = [james, agnes, sally, snowy] #the youngest_cat function takes a list as its input
 print("Youngest is ", youngest_cat(my_cats).name)
-
+```
 ## Back to the case studies, but now in python
 
 The centre meetings problem:
+```
 #represents a meeting request
 class Request:
 	def _init_(self, input_name, input_start, input_end):
@@ -846,3 +854,5 @@ if vote >= 2 :
 	print("prediction: suitable!")
 else:
 	print("prediction: not suitable")
+```
+
